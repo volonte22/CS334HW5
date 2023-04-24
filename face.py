@@ -1,5 +1,6 @@
 import cv2
 import dlib
+import time
 
 # To install dlib, run:
 # pip install cmake
@@ -16,6 +17,10 @@ eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 # Load the facial landmark predictor
 predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
 detector = dlib.get_frontal_face_detector()
+
+# Initialize variables for measuring FPS
+prev_time = 0
+fps = 0
 
 while True:
     # Capture a frame from the video stream
@@ -62,6 +67,14 @@ while True:
             eye_dist = right_eye_pos[0] - left_eye_pos[0]
             if eye_dist > 2 * w or eye_dist < 0.5 * w:
                 faces = []
+     # Calculate FPS
+    curr_time = time.time()
+    fps = 1 / (curr_time - prev_time)
+    prev_time = curr_time
+
+    # Add FPS counter to the frame
+    fps_text = f"FPS: {int(fps)}"
+    cv2.putText(frame, fps_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
     # Display the resulting frame
     cv2.imshow('frame', frame)
