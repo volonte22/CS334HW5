@@ -1,5 +1,12 @@
 import cv2
 import sys
+import serial
+import time
+
+# serial ports connected to arduino
+# com4/com5 corresponding to placements on arduino
+ser1 = serial.Serial('COM4', 9800, timeout=1)
+ser2 = serial.Serial('COM5', 9800, timeout=1)
 
 # create a face cascade
 cascPath = sys.argv[1]
@@ -10,6 +17,9 @@ video_capture = cv2.VideoCapture(0)
 outputBool = False
 
 def getFace():
+    # turn led 1 on
+    ser1.writelines(b'H')
+    
     # while we want to read in data, read it in
     while True:
         # get frame by frame data
@@ -24,6 +34,12 @@ def getFace():
             minSize=(30, 30),
             flags=cv2.cv.CV_HAAR_SCALE_IMAGE
         )
+        
+        if ( faces == null ) {
+            ser2.writelines(b'L')
+        } else {
+            ser2.writelines(b'H')
+        }
 
         # draw rect
         for (x, y, w, h) in faces:
@@ -35,4 +51,6 @@ def getFace():
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+            
+        
 
