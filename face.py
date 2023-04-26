@@ -4,8 +4,8 @@ import time
 import machine
 
 # pin intialization
-led_pin1 = machine.Pin(13, machine.Pin.OUT)
-led_pin2 = machine.Pin(14, machine.Pin.OUT)
+led_pin1 = machine.Pin(2, machine.Pin.OUT)
+led_pin2 = machine.Pin(5, machine.Pin.OUT)
 
 # To install dlib, run:
 # pip install cmake
