@@ -1,7 +1,7 @@
 import cv2
 import dlib
 import time
-from machine import Ping
+from machine import Pin
 
 # pin intialization
 led_pin1 = machine.Pin(4, Pin.OUT)
