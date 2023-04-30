@@ -5,7 +5,6 @@ from machine import Ping
 
 # pin intialization
 led_pin1 = machine.Pin(4, Pin.OUT)
-led_pin2 = machine.Pin(5, Pin.OUT)
 
 # To install dlib, run:
 # pip install cmake
@@ -44,9 +43,17 @@ while True:
         print("No faces")
         # turn led on
         led_pin2.value(1)
+        time.sleep(1)
     else:
         # turn led off
-        led_pin2.value(1)
+        led_pin1.value(1)
+        time.sleep(0.1)
+        led_pin1.value(0)
+        time.sleep(0.1)
+        led_pin1.value(1)
+        time.sleep(0.1)
+        led_pine1.value(0)
+        time.sleep(1)
         # Draw a rectangle around each detected face
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
@@ -99,6 +106,5 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 # turn off leds
-led_pin1.off()
-led_pin2.off()
+led_pin1.value(0)
 time.sleep(2)
