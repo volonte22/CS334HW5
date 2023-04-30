@@ -1,11 +1,11 @@
 import cv2
 import dlib
 import time
-import machine
+from machine import Ping
 
 # pin intialization
-led_pin1 = machine.Pin(4, machine.Pin.OUT)
-led_pin2 = machine.Pin(5, machine.Pin.OUT)
+led_pin1 = machine.Pin(4, Pin.OUT)
+led_pin2 = machine.Pin(5, Pin.OUT)
 
 # To install dlib, run:
 # pip install cmake
@@ -28,7 +28,7 @@ prev_time = 0
 fps = 0
 
 # turn inital led on
-led_pin1.on()
+led_pin1.value(1)
 
 while True:
     # Capture a frame from the video stream
@@ -43,10 +43,10 @@ while True:
     if(len(faces) == 0):
         print("No faces")
         # turn led on
-        led_pin2.on()
+        led_pin2.value(1)
     else:
         # turn led off
-        led_pin2.off()
+        led_pin2.value(1)
         # Draw a rectangle around each detected face
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
