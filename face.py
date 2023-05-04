@@ -30,9 +30,11 @@ def lookForFace():
         # light if there is a face, no light if there isnt a face
         print(len(faces))
         if (len(faces) == 0 ):
-            ser.write(b'1')
+            #ser.write(b'1')
+            print('Face detected: led OFF')
         else:
-            ser.write(b'0')
+            #ser.write(b'0')
+            print('Face detected: led ON')
 
         for (x, y, w, h) in faces:
             cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
@@ -44,6 +46,8 @@ def lookForFace():
             break
 
 def run():
-    startup()
+    #startup()
     lookForFace()
     cap.release()
+
+run()
