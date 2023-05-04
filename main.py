@@ -1,4 +1,4 @@
-import arduinoSetup as AS
+import face as F
 
 
-AS.run()
+F.run()
